@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+  // 서비스는 class constructor를 통해 컨트롤러에 주입됨. 
+  // private syntax을 사용함. 
+  // 이 약어를 사용하면 동일한 위치에서 즉시 service member을 선언하고 초기화할 수 있음.
 
   @Get()
   getHello(): string {
@@ -36,15 +39,15 @@ export class AppController {
 
   @Post('create') //header 접근 방법
   @Header('Cache-Control', 'none')
-  createHello(): string {
-    return this.appService.getHello();
+  create(): string {
+    return this.appService.create();
   }
 
 
   @Post('create')
   @HttpCode(204) // stutus code 입력
-  createHello(): string {
-    return this.appService.getHello();
+  create(): string {
+    return this.appService.create();
   }
 
   @Get('ab*cd') // wildCard route
